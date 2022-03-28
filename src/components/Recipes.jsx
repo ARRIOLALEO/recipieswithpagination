@@ -3,12 +3,16 @@ import {RecipesContext} from '../context/GeneralContex'
 import {Grid,CardMedia, Button,Card, CardHeader,CardContent,Divider} from '@mui/material'
 import {Link} from 'react-router-dom'
 function Recipes(){
-    const {allRecipes} = useContext(RecipesContext)
+    const {allRecipes,pageNow,howManyPages,howNamyElements} = useContext(RecipesContext)
+    const start = pageNow === 0 ? 0 : pageNow * howNamyElements
+    const end = start + howNamyElements
+    const recipiesToshow = allRecipes.slice(start,end)
+
     return(
         <>
         <Grid container spacing={2}>
             {
-                allRecipes.map(({recipe})=>(
+                recipiesToshow.map(({recipe})=>(
                     <Grid item xs={6} md={3}>
                         <Card>
                             <CardHeader title={recipe.label}/>

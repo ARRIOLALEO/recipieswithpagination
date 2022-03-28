@@ -7,18 +7,21 @@ import Header from '../components/Header'
 function RecipeDetails(){
     const {recipeLabel} = useParams()
     const {allRecipes} = useContext(RecipesContext)
-    const seletedRecipe = allRecipes.filter(({recipe})=> recipe.label === recipeLabel )[0].recipe
+    const seletedRecipe = allRecipes.filter(({recipe})=> recipe.label === recipeLabel )[0].recipe ;
     const [value, setValue] = useState('1')
 
     const handlerChange =(event,newValue)=>{
         setValue(newValue)
     }
+  
     return(
         <>
         <Header/>
         <Grid container spacing={2}>
-            
+            {seletedRecipe? (
+                 <>
             <Grid item xs={12} md={6}>
+               
                 <h2>{recipeLabel}</h2>
                 <img src={seletedRecipe.image} alt={recipeLabel}/>
             </Grid>
@@ -33,7 +36,7 @@ function RecipeDetails(){
                     <TabPanel value="2">Panel 2</TabPanel>
                     <TabPanel value="3">Panel 3</TabPanel>
                 </TabContext>
-            </Grid>
+            </Grid></>):null}
             </Grid>
             </>
     )
